@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Food Donation - Welcome</title>
     <link rel="stylesheet" href="css/styles.css">
+
 </head>
 <body>
     <header>
@@ -16,6 +17,51 @@
             <a href="login.html" class="btn">Login</a>
             <a href="register.html" class="btn">Register</a>
         </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <p id="typing-text"></p>
+
     </main>
+    <script>
+        const text = "Food wastage is a supply and demand problem. And we are the logistics solution for it.";
+        let index = 0;
+        let reverse = false;
+        let currentColor = getRandomColor(); // Initial random color
+        
+        function getRandomColor() {
+            const colors = ["#E63946", "#F4A261", "#2A9D8F", "#457B9D", "#F77F00", "#06D6A0", "#E76F51"]; // Avoid black
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+        
+        function typeEffect() {
+            const displayText = document.getElementById("typing-text");
+        
+            if (!displayText) return; // Ensure the element exists
+        
+            if (!reverse) {
+                displayText.innerHTML = `<span style="color: ${currentColor}">${text.substring(0, index++)}</span>`;
+                if (index > text.length) {
+                    reverse = true;
+                    setTimeout(typeEffect, 1000); // Pause before reversing
+                    return;
+                }
+            } else {
+                displayText.innerHTML = `<span style="color: ${currentColor}">${text.substring(0, index--)}</span>`;
+                if (index === 0) {
+                    reverse = false;
+                    currentColor = getRandomColor(); // Change color when restarting
+                }
+            }
+            setTimeout(typeEffect, 100);
+        }
+        
+        document.addEventListener("DOMContentLoaded", typeEffect);
+        </script>
+        
+
 </body>
 </html>
